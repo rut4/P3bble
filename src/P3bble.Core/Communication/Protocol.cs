@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.Devices.Bluetooth.Rfcomm;
+using Windows.Devices.Enumeration;
 using P3bble.Constants;
 using Windows.Networking.Proximity;
 using Windows.Networking.Sockets;
@@ -53,9 +55,9 @@ namespace P3bble.Communication
         public static async Task<Protocol> CreateProtocolAsync(PeerInformation peer)
         {
 #if WINDOWS_PHONE || WINDOWS_PHONE_APP
-            // {00001101-0000-1000-8000-00805f9b34fb} specifies we want a Serial Port - see http://developer.nokia.com/Community/Wiki/Bluetooth_Services_for_Windows_Phone
+            var serviceId = Guid.Parse("00000000-deca-fade-deca-deafdecacaff").ToString("B");
             StreamSocket socket = new StreamSocket();
-            await socket.ConnectAsync(peer.HostName, new Guid(0x00001101, 0x0000, 0x1000, 0x80, 0x00, 0x00, 0x80, 0x5F, 0x9B, 0x34, 0xFB).ToString("B"));
+            await socket.ConnectAsync(peer.HostName, serviceId);
             return new Protocol(socket);
 #endif
 

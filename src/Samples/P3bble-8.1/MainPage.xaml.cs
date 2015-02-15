@@ -336,12 +336,12 @@ namespace P3bble
             {
                 byte[] cookie = new byte[] { 0x00, 0xEB, 0x00, 0x00 };
                 await _pebble.PhoneCallAsync("P3root", "555 555 555", cookie);
-                await _pebble.RingAsync(cookie);
+                /*await _pebble.RingAsync(cookie);
                 await _pebble.RingAsync(cookie);
                 await _pebble.RingAsync(cookie);
 
                 await _pebble.StartCallAsync(cookie);
-                await _pebble.EndCallAsync(cookie);
+                await _pebble.EndCallAsync(cookie);*/
             }
             else
             {
